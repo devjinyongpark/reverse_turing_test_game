@@ -138,6 +138,22 @@ class ReverseTuringTestGame():
         - Host: Shows who is the one got most vote. Reveal the identity.
         - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         """
+        # TODO: if it is the first round, Host explains the game instruction
+
+        # TODO: Host asks a question.
+
+        # TODO: Each Players answer the question in a random order:
+
+        # TODO: Host: switch to the voting
+
+        # TODO: Before voting, Every Player say their reasoning.
+
+        # TODO: Each Player Vote anonymously.
+
+        # TODO: Host: Shows who is the one got most vote. Reveal the identity.
+        
+        # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
+        
 
 
 
