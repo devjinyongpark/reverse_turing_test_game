@@ -72,6 +72,10 @@ class ReverseTuringTestGame():
 
         # TODO: Before voting, Every Player say their reasoning.
 
+        # Host: Voting
+        self.gameprint("Host", "Moment of Truth. \
+                       Vote who do you think the most suspicious player as human.")
+
         # TODO: Each Player Vote anonymously.
 
         # TODO: Host: Shows who is the one got most vote. Reveal the identity.
