@@ -13,10 +13,10 @@ class Player():
     def __init__(self, name):
         self.name = name
 
-    def response(self):
+    def response(self, gamelog: str):
         raise NotImplementedError
     
-    def vote(self, candidates):
+    def vote(self, candidates, gamelog: str):
         raise NotImplementedError
 
 class TooManyRedoError(Exception):
@@ -63,10 +63,10 @@ class AIPlayer(Player):
             redo_count += 1
 
 class UserPlayer(Player):
-    def response(self):
+    def response(self, gamelog: str):
         return input("Response: ")
     
-    def vote(self, candidates: list[str]):
+    def vote(self, candidates: list[str], gamelog: str):
         """
         Print Candidate list
         Return one of the candidate name in the candidates.
