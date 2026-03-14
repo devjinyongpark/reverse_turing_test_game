@@ -1,6 +1,6 @@
 from typing import Optional, Any
 from Players import Player, UserPlayer, AIPlayer
-
+import random 
         
 class ReverseTuringTestGame():
     """
@@ -11,7 +11,8 @@ class ReverseTuringTestGame():
     - self.difficulty in ['Easy', 'Normal', 'Hard']
     - 2 < self.number_of_ai < 5
     - 1 <= self.curr_round <= number_of_ai + 1
-    - No player can be named "Host" and no player can have the same name
+    - No player can be named "Host" and no player can have the same name 
+    - len(self.players) >= 3
     """
     difficulty: str
     number_of_ai: int
@@ -70,6 +71,12 @@ class ReverseTuringTestGame():
         
 
         # TODO: Each Players answer the question in a random order:
+        num = len(self.players) 
+        while num > 0: 
+            choose = random.randint(0, num-1)
+            if list(self.players.values())[choose] isinstance(AIPlayer): 
+                name = 
+                gameprint()
 
         # Host: switch to the voting
         self.gameprint("Host", "Now, we've gathered all answers. \
