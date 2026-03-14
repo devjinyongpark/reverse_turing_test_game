@@ -62,12 +62,11 @@ class UserPlayer(Player):
         Print Candidate list
         Return one of the candidate name in the candidates.
         If it is not in the list, repeat again."""
-        raise NotImplementedError 
         print(candidates)
         vote = input("Vote for") 
         valid = False 
         while not valid: 
-            if vote in candidate: 
+            if vote in candidates: 
                 valid = True 
             else: 
                 print("Not Valid")
