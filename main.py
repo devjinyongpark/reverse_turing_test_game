@@ -142,10 +142,10 @@ class ReverseTuringTestGame():
 
         # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         if isinstance(eliminated_player, UserPlayer): 
-            self.playing = False 
+            self.is_playing = False 
             self.winner = 'AIs'
         elif len(self.players) == 2:
-            self.playing = False
+            self.is_playing = False
             self.winner = "HUMANS"    
         else:  
             self.curr_round += 1 
