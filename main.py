@@ -95,14 +95,25 @@ class ReverseTuringTestGame():
     difficulty: str
     number_of_ai: int
     curr_round: int 
-    ai_profiles: str
+    players: dict[str, Player]
     is_playing: bool
-    winner: 'str'
+    winner: Optional[str]
         
-    def __init__(self):
+    def __init__(self, difficulty='Normal', number_of_ai=3):
         # Temporary
-        self.difficulty = 'Normal'
-        self.number_of_ai = 3
+        self.difficulty = difficulty
+        self.number_of_ai = number_of_ai
+        self.curr_round = 1
+        self.players = {} 
+        self.winner = 
+        human_name  = input("Enter Your Name:")
+        human = UserPlayer(human_name)
+        self.players[human_name] = human
+        for i in range(self.number_of_ai): 
+            name = input("Enter Name for AI")
+            name2 = AIPlayer(name) 
+            self.players[name] = name2 
+
     
     def start(self):
         self.curr_round = 1
