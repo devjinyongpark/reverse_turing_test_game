@@ -19,6 +19,9 @@ class Player():
     def vote(self, candidates):
         raise NotImplementedError
 
+class TooManyRedoError(Exception):
+    pass
+
 class AIPlayer(Player):
     name: str
     model: str
@@ -39,19 +42,25 @@ class AIPlayer(Player):
         return response.output_text
 
     def vote(self, candidates: list, chatlog: str):
-        valid = False
-        while not valid:
+        redo_count = 0
+        while True:
             response = client.responses.create(
                 model = "gpt-4o",
                 input = f"You are an AI playing Reverse Turing Test Game. \
                     Your name is {self.name} \
-                    Responese to the lase round's question from the game host. \
+                    Vote the most suspicious player as a human. \
+                    You MUST ONLY output candidates name WITHOUT any explanations. \
                     Chatlog: \
-                    {chatlog}"
+                    {chatlog} \
+                    Candidates: \
+                    {', '.join(candidates)}"
             )
-
-        raise NotImplementedError
-
+            target = response.output_text
+            if target in candidates: 
+                return target
+            if redo_count > 10:
+                raise TooManyRedoError
+            redo_count += 1
 
 class UserPlayer(Player):
     def response(self):
