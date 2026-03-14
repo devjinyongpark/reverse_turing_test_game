@@ -49,6 +49,7 @@ class ReverseTuringTestGame():
     curr_round: int
     ai_profiles: str
     is_playing: bool
+    winner: 'str'
         
     def __init__(self):
         # Temporary
@@ -64,6 +65,17 @@ class ReverseTuringTestGame():
 
 
     def proceed_round(self):
+        """
+        Process
+        - if it is the first round, Host explains the game instruction
+        - Host asks a question.
+        - Each Players answer the question in a random order:
+        - Host: switch to the voting
+        - Before voting, Every Player say their reasoning.
+        - Each Player Vote anonymously.
+        - Host: Shows who is the one got most vote. Reveal the identity.
+        - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
+        """
 
 
 
