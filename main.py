@@ -36,7 +36,6 @@ class ReverseTuringTestGame():
             name2 = AIPlayer(name) 
             self.players[name] = name2 
 
-    
     def start(self):
         self.curr_round = 1
         self.is_playing = True
@@ -44,6 +43,10 @@ class ReverseTuringTestGame():
         while self.is_playing:
             self.proceed_round()
 
+    def gameprint(self, name, content):
+        line = f"{name}: {content}"
+        print(line)
+        self.gamelog += line
 
     def proceed_round(self):
         """
@@ -64,6 +67,7 @@ class ReverseTuringTestGame():
         # TODO: Each Players answer the question in a random order:
 
         # TODO: Host: switch to the voting
+        print("Host: ")
 
         # TODO: Before voting, Every Player say their reasoning.
 
