@@ -84,7 +84,7 @@ class ReverseTuringTestGame():
         # Round Indicator
         self.gameprint(f"========== Round {self.curr_round} ==========")
 
-        # TODO: if it is the first round, Host explains the game instruction
+        # if it is the first round, Host explains the game instruction
         if self.curr_round == 1: 
             self.gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
 
@@ -92,7 +92,7 @@ class ReverseTuringTestGame():
         question = get_random_question()
         self.gameprint("Host", question)
 
-        # TODO: Each Players answer the question in a random order:
+        #Each Players answer the question in a random order:
         random.shuffle(list(self.players.values()))
         for player in self.players.values(): 
             self.gameprint(player.name, player.response(self.gamelog))
@@ -101,7 +101,10 @@ class ReverseTuringTestGame():
         self.gameprint("Host", "Now, we've gathered all answers. \
                        Before voting, share your thought on who is a human.")
 
-        # TODO: Before voting, Every Player say their reasoning.
+        #Before voting, Every Player say their reasoning.
+        random.shuffle(list(self.players.values()))
+        for player in self.players.values(): 
+            self.gameprint(player.name, player.response(self.gamelog))
 
         # Host: Voting
         self.gameprint("Host", "Moment of Truth. \
