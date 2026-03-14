@@ -59,6 +59,10 @@ class ReverseTuringTestGame():
 
         while self.is_playing:
             self.proceed_round()
+        self.end_event()
+
+    def end_event(self):
+        pass
 
     def gameprint(self, name, content):
         line = "\n"
@@ -127,6 +131,13 @@ class ReverseTuringTestGame():
             message = "There was a Tie between " + ", ".join(targets[:-1]) + " and "
 
         # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
+        if isinstance(target, UserPlayer): 
+            self.playing = False 
+            self.winner = 'AIs'
+            
+        else: 
+            self.curr_round += 1 
+
         
 
 
