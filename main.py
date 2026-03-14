@@ -119,6 +119,5 @@ class ReverseTuringTestGame():
 
 
 if __name__ == "__main__":
-    # Game = ReverseTuringTestGame()
-    # Game.start()
-    print(AIPlayer('Chris').response('question: what is your name?'))
+    Game = ReverseTuringTestGame()
+    Game.start()
