@@ -87,6 +87,7 @@ class ReverseTuringTestGame():
         """
         # Round Indicator
         self.gameprint(f"========== Round {self.curr_round} ==========")
+        self.gameprint(f"    Remaining Players: {len(self.players)}")
 
         # if it is the first round, Host explains the game instruction
         if self.curr_round == 1: 
@@ -124,11 +125,22 @@ class ReverseTuringTestGame():
         is_there_a_tie = list(voted_players.values).count(most_vote) > 1
         targets = [name for name in voted_players.keys() if voted_players[name] == most_vote]
 
-        # TODO: Host: Shows who is the one got most vote. Reveal the identity.
+        # Host: Shows who is the one got most vote. Reveal the identity.
         if is_there_a_tie and len(most_vote) == 2:
-            self.gameprint("Host", f"There was a Tie between {targets[0]} and {targets[1]}. Game continues.")
+            self.gameprint("Host", f"There was a Tie between {targets[0]} and {targets[1]} with {most_vote} votes each.\nGame continues.")
         elif is_there_a_tie:
-            message = "There was a Tie between " + ", ".join(targets[:-1]) + " and "
+            self.gameprint("Host", f"There was a Tie between {', '.join(targets[:-1])} and {targets[-1]} with {most_vote} votes each.\nGame continues.")
+        else:
+            eliminated_player = self.players[targets[0]]
+            self.gameprint("Host", f"{eliminated_player.name} got the most vote({most_vote}).")
+            if isinstance(eliminated_player, UserPlayer):
+                self.gameprint("Host", f"{eliminated_player.name} is Eliminated.\n{eliminated_player.name} was a human.")
+                self.players.pop(eliminated_player.name)
+            elif isinstance(eliminated_player, AIPlayer):
+                self.gameprint("Host", f"{eliminated_player.name} is Eliminated.\n{eliminated_player.name} was an AI.")
+                self.players.pop(eliminated_player.name)
+            else:
+                raise TypeError("Player has to be either UserPlayer or AIPlayer.")
 
         # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         if isinstance(target, UserPlayer): 
