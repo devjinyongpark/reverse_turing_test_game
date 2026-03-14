@@ -62,7 +62,7 @@ class ReverseTuringTestGame():
         self.end_event()
 
     def end_event(self):
-        pass
+        self.gameprint("Host", f"THE WINNERS ARE THE {self.winner}!!!")
 
     def gameprint(self, name, content):
         line = "\n"
@@ -146,8 +146,10 @@ class ReverseTuringTestGame():
         if isinstance(target, UserPlayer): 
             self.playing = False 
             self.winner = 'AIs'
-            
-        else: 
+        elif len(self.players) == 2:
+            self.playing = False
+            self.winner = "HUMANS"    
+        else:  
             self.curr_round += 1 
 
         
