@@ -118,9 +118,14 @@ class ReverseTuringTestGame():
         
         most_vote = max(voted_players.values)
         is_there_a_tie = list(voted_players.values).count(most_vote) > 1
+        targets = [name for name in voted_players.keys() if voted_players[name] == most_vote]
 
         # TODO: Host: Shows who is the one got most vote. Reveal the identity.
-        
+        if is_there_a_tie and len(most_vote) == 2:
+            self.gameprint("Host", f"There was a Tie between {targets[0]} and {targets[1]}. Game continues.")
+        elif is_there_a_tie:
+            message = "There was a Tie between " + ", ".join(targets[:-1]) + " and "
+
         # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         
 
