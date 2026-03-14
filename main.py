@@ -11,6 +11,7 @@ class ReverseTuringTestGame():
     - self.difficulty in ['Easy', 'Normal', 'Hard']
     - 2 < self.number_of_ai < 5
     - 1 <= self.curr_round <= number_of_ai + 1
+    - No player can be named "Host" and no player can have the same name
     """
     difficulty: str
     number_of_ai: int
@@ -33,7 +34,8 @@ class ReverseTuringTestGame():
         self.players[human_name] = human
         for i in range(self.number_of_ai): 
             name = input("Enter Name for AI")
-            name2 = AIPlayer(name) 
+            name2 = AIPlayer(name)
+             
             self.players[name] = name2 
 
     def start(self):
@@ -61,8 +63,11 @@ class ReverseTuringTestGame():
         - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         """
         # TODO: if it is the first round, Host explains the game instruction
+        if curr_round == 1: 
+            gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
 
         # TODO: Host asks a question.
+        
 
         # TODO: Each Players answer the question in a random order:
 
