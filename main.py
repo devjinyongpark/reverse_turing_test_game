@@ -66,8 +66,9 @@ class ReverseTuringTestGame():
 
         # TODO: Each Players answer the question in a random order:
 
-        # TODO: Host: switch to the voting
-        print("Host: ")
+        # Host: switch to the voting
+        self.gameprint("Host", "Now, we've gathered all answers. \
+                       Before voting, share your thought on who is a human.")
 
         # TODO: Before voting, Every Player say their reasoning.
 
