@@ -61,10 +61,11 @@ class ReverseTuringTestGame():
             self.proceed_round()
 
     def gameprint(self, name, content):
+        line = "\n"
         if name == "":
-            line = content
+            line += content
         else:
-            line = f"{name}: {content}"
+            line += f"{name}: {content}"
         print(line)
         self.gamelog += line
 
@@ -81,17 +82,15 @@ class ReverseTuringTestGame():
         - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         """
         # Round Indicator
-        
+        self.gameprint(f"========== Round {self.curr_round} ==========")
 
         # TODO: if it is the first round, Host explains the game instruction
         if curr_round == 1: 
             gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
 
-        # TODO: Host asks a question.
+        # Host asks a question.
         question = get_random_question()
         self.gameprint("Host", question)
-
-        
 
         # TODO: Each Players answer the question in a random order:
         num = len(self.players) 
