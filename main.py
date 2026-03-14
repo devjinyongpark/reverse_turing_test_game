@@ -1,6 +1,20 @@
 from typing import Optional, Any
 from Players import Player, UserPlayer, AIPlayer
 import random 
+
+def get_random_question():
+        filename = 'questions.txt'
+        try:
+            with open(filename, 'r') as f:
+                lines = f.readlines()
+            
+            if lines:
+                # random.choice selects a random element from a sequence
+                return random.choice(lines).strip() # Use .strip() to remove extra newlines
+            else:
+                return None # Handle empty file case
+        except FileNotFoundError:
+            return "Error: File not found"
         
 class ReverseTuringTestGame():
     """
@@ -51,20 +65,6 @@ class ReverseTuringTestGame():
         print(line)
         self.gamelog += line
 
-    def get_random_question(self):
-        filename = 'questions.txt'
-        try:
-            with open(filename, 'r') as f:
-                lines = f.readlines()
-            
-            if lines:
-                # random.choice selects a random element from a sequence
-                return random.choice(lines).strip() # Use .strip() to remove extra newlines
-            else:
-                return None # Handle empty file case
-        except FileNotFoundError:
-            return "Error: File not found"
-
     def proceed_round(self):
         """
         Process
@@ -82,6 +82,7 @@ class ReverseTuringTestGame():
             gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
 
         # TODO: Host asks a question.
+        question = self.get_random_question()
 
         
 
