@@ -48,7 +48,7 @@ class ReverseTuringTestGame():
         human = UserPlayer(human_name)
         self.players[human_name] = human
         for i in range(self.number_of_ai): 
-            name = input("Enter Name for AI")
+            name = input("Enter Name for AI:")
             name2 = AIPlayer(name)
              
             self.players[name] = name2 
@@ -86,8 +86,8 @@ class ReverseTuringTestGame():
         - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         """
         # Round Indicator
-        self.gameprint(f"========== Round {self.curr_round} ==========")
-        self.gameprint(f"    Remaining Players: {len(self.players)}")
+        self.gameprint("", f"========== Round {self.curr_round} ==========")
+        self.gameprint("", f"    Remaining Players: {len(self.players)}")
 
         # if it is the first round, Host explains the game instruction
         if self.curr_round == 1: 
@@ -103,8 +103,7 @@ class ReverseTuringTestGame():
             self.gameprint(player.name, player.response(self.gamelog))
 
         # Host: switch to the voting
-        self.gameprint("Host", "Now, we've gathered all answers. \
-                       Before voting, share your thought on who is a human.")
+        self.gameprint("Host", "Now, we've gathered all answers.\nBefore voting, share your thought on who is a human.")
 
         #Before voting, Every Player say their reasoning.
         random.shuffle(list(self.players.values()))
@@ -112,17 +111,16 @@ class ReverseTuringTestGame():
             self.gameprint(player.name, player.response(self.gamelog))
 
         # Host: Voting
-        self.gameprint("Host", "Moment of Truth. \
-                       Vote who do you think the most suspicious player as human.")
+        self.gameprint("Host", "Moment of Truth.\nVote who do you think the most suspicious player as human.")
 
         # Each Player Vote anonymously.
         voted_players = {player: 0 for player in self.players}
-        for player in self.players.values:
-            target = player.vote(self.players.keys, self.gamelog)
+        for player in self.players.values():
+            target = player.vote(list(self.players.keys()), self.gamelog)
             voted_players[target] += 1
         
-        most_vote = max(voted_players.values)
-        is_there_a_tie = list(voted_players.values).count(most_vote) > 1
+        most_vote = max(voted_players.values())
+        is_there_a_tie = list(voted_players.values()).count(most_vote) > 1
         targets = [name for name in voted_players.keys() if voted_players[name] == most_vote]
 
         # Host: Shows who is the one got most vote. Reveal the identity.
@@ -143,7 +141,7 @@ class ReverseTuringTestGame():
                 raise TypeError("Player has to be either UserPlayer or AIPlayer.")
 
         # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
-        if isinstance(target, UserPlayer): 
+        if isinstance(eliminated_player, UserPlayer): 
             self.playing = False 
             self.winner = 'AIs'
         elif len(self.players) == 2:

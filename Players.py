@@ -35,7 +35,8 @@ class AIPlayer(Player):
             model = "gpt-4o",
             input = f"You are an AI playing Reverse Turing Test Game. \
                 Your name is {self.name} \
-                Responese to the lase round's question from the game host. \
+                Responese to the lase round's question from the game host with few sentences. \
+                Do not add your name at the start of the response. \
                 Gamelog: \
                 {gamelog}"
         )
