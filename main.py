@@ -35,10 +35,23 @@ class UserPlayer(Player):
         Print Candidate list
         Return one of the candidate name in the candidates.
         If it is not in the list, repeat again."""
-        raise NotImplementedError
-
+        raise NotImplementedError 
+        print(candidates)
+        vote = input("Vote for") 
+        valid = False 
+        while not valid: 
+            if vote in candidate: 
+                valid = True 
+            else: 
+                print("Not Valid")
+                vote = input("Vote for")
+        return vote 
+        
 class ReverseTuringTestGame():
     """
+    Class for an instance of the game. 
+    Note: if there is a tie then just play another round without voting out a player. 
+
     === Preconditions ===
     - self.difficulty in ['Easy', 'Normal', 'Hard']
     - 2 < self.number_of_ai < 5
@@ -46,7 +59,7 @@ class ReverseTuringTestGame():
     """
     difficulty: str
     number_of_ai: int
-    curr_round: int
+    curr_round: int 
     ai_profiles: str
     is_playing: bool
     winner: 'str'
