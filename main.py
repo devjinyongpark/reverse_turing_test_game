@@ -81,7 +81,14 @@ class ReverseTuringTestGame():
         self.gameprint("Host", "Moment of Truth. \
                        Vote who do you think the most suspicious player as human.")
 
-        # TODO: Each Player Vote anonymously.
+        # Each Player Vote anonymously.
+        voted_players = {player: 0 for player in self.players}
+        for player in self.players.values:
+            target = player.vote(self.players.keys, self.gamelog)
+            voted_players[target] += 1
+        
+        most_vote = max(voted_players.values)
+        is_there_a_tie = list(voted_players.values).count(most_vote) > 1
 
         # TODO: Host: Shows who is the one got most vote. Reveal the identity.
         
