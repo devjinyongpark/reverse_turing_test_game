@@ -1,3 +1,12 @@
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=api_key)
+
 class Player():
     name: str
 
@@ -17,12 +26,30 @@ class AIPlayer(Player):
     def __init__(self, name):
         super().__init__(name)
         self.model = 'gpt-4o'
-        raise NotImplementedError
     
     def response(self, chatlog: str):
-        raise NotImplementedError
+        response = client.responses.create(
+            model = "gpt-4o",
+            input = f"You are an AI playing Reverse Turing Test Game. \
+                Your name is {self.name} \
+                Responese to the lase round's question from the game host. \
+                Chatlog: \
+                {chatlog}"
+        )
+        return response.output_text
 
     def vote(self, candidates: list, chatlog: str):
+        valid = False
+        while not valid:
+            response = client.responses.create(
+                model = "gpt-4o",
+                input = f"You are an AI playing Reverse Turing Test Game. \
+                    Your name is {self.name} \
+                    Responese to the lase round's question from the game host. \
+                    Chatlog: \
+                    {chatlog}"
+            )
+
         raise NotImplementedError
 
 
@@ -93,5 +120,6 @@ class ReverseTuringTestGame():
 
 
 if __name__ == "__main__":
-    Game = ReverseTuringTestGame()
-    Game.start()
+    # Game = ReverseTuringTestGame()
+    # Game.start()
+    print(AIPlayer('Chris').response('question: what is your name?'))
