@@ -106,7 +106,7 @@ class ReverseTuringTestGame():
         self.number_of_ai = number_of_ai
         self.curr_round = 1
         self.players = {} 
-        self.winner = 
+        self.winner = None
         human_name  = input("Enter Your Name:")
         human = UserPlayer(human_name)
         self.players[human_name] = human
