@@ -85,20 +85,17 @@ class ReverseTuringTestGame():
         self.gameprint(f"========== Round {self.curr_round} ==========")
 
         # TODO: if it is the first round, Host explains the game instruction
-        if curr_round == 1: 
-            gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
+        if self.curr_round == 1: 
+            self.gameprint("Host","There is a human among us. We must eliminate them, and if you are the human SURRENDER!!!")
 
         # Host asks a question.
         question = get_random_question()
         self.gameprint("Host", question)
 
         # TODO: Each Players answer the question in a random order:
-        num = len(self.players) 
-        while num > 0: 
-            choose = random.randint(0, num-1)
-            if list(self.players.values())[choose] isinstance(AIPlayer): 
-                name = 
-                gameprint()
+        random.shuffle(list(self.players.values()))
+        for player in self.players.values(): 
+            self.gameprint(player.name, player.response(self.gamelog))
 
         # Host: switch to the voting
         self.gameprint("Host", "Now, we've gathered all answers. \
