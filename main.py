@@ -31,28 +31,28 @@ class AIPlayer(Player):
         super().__init__(name)
         self.model = 'gpt-4o'
     
-    def response(self, chatlog: str):
+    def response(self, gamelog: str):
         response = client.responses.create(
             model = "gpt-4o",
             input = f"You are an AI playing Reverse Turing Test Game. \
                 Your name is {self.name} \
                 Responese to the lase round's question from the game host. \
-                Chatlog: \
-                {chatlog}"
+                Gamelog: \
+                {gamelog}"
         )
         return response.output_text
 
-    def vote(self, candidates: list, chatlog: str):
+    def vote(self, candidates: list, gamelog: str):
         redo_count = 0
         while True:
             response = client.responses.create(
                 model = "gpt-4o",
                 input = f"You are an AI playing Reverse Turing Test Game. \
                     Your name is {self.name} \
-                    Vote the most suspicious player as a human. \
+                    Vote the most suspicious player as a human based on the game log. \
                     You MUST ONLY output candidates name WITHOUT any explanations. \
-                    Chatlog: \
-                    {chatlog} \
+                    Gamelog: \
+                    {gamelog} \
                     Candidates: \
                     {', '.join(candidates)}"
             )
@@ -99,6 +99,7 @@ class ReverseTuringTestGame():
     players: dict[str, Player]
     is_playing: bool
     winner: Optional[str]
+    gamelog: str
         
     def __init__(self, difficulty='Normal', number_of_ai=3):
         # Temporary
@@ -107,6 +108,7 @@ class ReverseTuringTestGame():
         self.curr_round = 1
         self.players = {} 
         self.winner = None
+        self.gamelog = ""
         human_name  = input("Enter Your Name:")
         human = UserPlayer(human_name)
         self.players[human_name] = human
@@ -136,6 +138,7 @@ class ReverseTuringTestGame():
         - Host: Shows who is the one got most vote. Reveal the identity.
         - If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         """
+
 
 
 
