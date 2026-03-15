@@ -1,6 +1,8 @@
 from typing import Optional, Any
 from Players import Player, UserPlayer, AIPlayer
 import random 
+import time
+import sounds
 
 def get_random_question():
         filename = 'questions.txt'
@@ -37,6 +39,10 @@ class ReverseTuringTestGame():
     gamelog: str
         
     def __init__(self, difficulty='Normal', number_of_ai=3):
+        # Intro Sound
+        sounds.sound_intro()
+        # sounds.loop_background()
+
         # Temporary
         self.difficulty = difficulty
         self.number_of_ai = number_of_ai
@@ -44,16 +50,19 @@ class ReverseTuringTestGame():
         self.players = {} 
         self.winner = None
         self.gamelog = ""
-        human_name  = input("Enter Your Name:")
+
+        human_name  = input("Enter Your Name: ")
         human = UserPlayer(human_name)
         self.players[human_name] = human
-        for i in range(self.number_of_ai): 
-            name = input("Enter Name for AI:")
-            name2 = AIPlayer(name)
+        for _ in range(self.number_of_ai): 
+            name = input("Enter Name for AI: ")
+            ai = AIPlayer(name)
              
-            self.players[name] = name2 
+            self.players[name] = ai 
 
     def start(self):
+        print("\n"*100)
+        sounds.sound_start_game()
         self.curr_round = 1
         self.is_playing = True
 
@@ -64,12 +73,15 @@ class ReverseTuringTestGame():
     def end_event(self):
         self.gameprint("Host", f"THE WINNERS ARE THE {self.winner}!!!")
 
-    def gameprint(self, name, content):
+    def gameprint(self, name: str, content: str):
+        time.sleep(0.1)
+        content = '\n      '.join(content.split('\n'))
         line = "\n"
         if name == "":
             line += content
         else:
             line += f"{name}: {content}"
+            sounds.sound_message()
         print(line)
         self.gamelog += line
 
@@ -140,10 +152,11 @@ class ReverseTuringTestGame():
             else:
                 raise TypeError("Player has to be either UserPlayer or AIPlayer.")
 
-        # TODO: If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
+        # If it is the user, game ends. change self.is_playing to False and change self.winner to 'AIs'
         if isinstance(eliminated_player, UserPlayer): 
             self.is_playing = False 
             self.winner = 'AIs'
+            sounds.sound_defeated()
         elif len(self.players) == 2:
             self.is_playing = False
             self.winner = "HUMANS"    

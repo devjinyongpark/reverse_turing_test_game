@@ -24,11 +24,6 @@ class TooManyRedoError(Exception):
 
 class AIPlayer(Player):
     name: str
-    model: str
-
-    def __init__(self, name):
-        super().__init__(name)
-        self.model = 'gpt-4o'
     
     def response(self, gamelog: str):
         response = client.responses.create(
@@ -65,20 +60,21 @@ class AIPlayer(Player):
 
 class UserPlayer(Player):
     def response(self, gamelog: str):
-        return input("Response: ")
+        return input("\nResponse: ")
     
     def vote(self, candidates: list[str], gamelog: str):
         """
         Print Candidate list
         Return one of the candidate name in the candidates.
-        If it is not in the list, repeat again."""
-        print(candidates)
-        vote = input("Vote for") 
+        If it is not in the list, repeat again.
+        """
+        print(f"Candidates: {', '.join(candidates)}")
+        vote = input("\nVote for: ") 
         valid = False 
         while not valid: 
             if vote in candidates: 
                 valid = True 
             else: 
-                print("Not Valid")
-                vote = input("Vote for")
+                print("Input Not Valid")
+                vote = input("\nVote for: ")
         return vote 
