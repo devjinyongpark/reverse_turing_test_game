@@ -39,6 +39,7 @@ class ReverseTuringTestGame():
     gamelog: str
         
     def __init__(self, difficulty='Normal', number_of_ai=3):
+        print("\n"*100)
         # Intro Sound
         sounds.sound_intro()
         # sounds.loop_background()
@@ -61,7 +62,6 @@ class ReverseTuringTestGame():
             self.players[name] = ai 
 
     def start(self):
-        print("\n"*100)
         sounds.sound_start_game()
         self.curr_round = 1
         self.is_playing = True
