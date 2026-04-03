@@ -136,7 +136,8 @@ class ReverseTuringTestGame():
         targets = [name for name in voted_players.keys() if voted_players[name] == most_vote]
 
         # Host: Shows who is the one got most vote. Reveal the identity.
-        if is_there_a_tie and len(most_vote) == 2:
+        eliminated_player = None
+        if is_there_a_tie and len(targets) == 2:
             self.gameprint("Host", f"There was a Tie between {targets[0]} and {targets[1]} with {most_vote} votes each.\nGame continues.")
         elif is_there_a_tie:
             self.gameprint("Host", f"There was a Tie between {', '.join(targets[:-1])} and {targets[-1]} with {most_vote} votes each.\nGame continues.")
@@ -159,7 +160,8 @@ class ReverseTuringTestGame():
             sounds.sound_defeated()
         elif len(self.players) == 2:
             self.is_playing = False
-            self.winner = "HUMANS"    
+            self.winner = "HUMANS"
+            sounds.sound_win()    
         else:  
             self.curr_round += 1 
 

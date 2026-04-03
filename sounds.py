@@ -27,4 +27,6 @@ def sound_defeated():
     playsound("sounds/grimgravy-call-alert-strain-195737.mp3", block=False) 
 
 def sound_win():
-    playsound("sounds/benkirb-notification-sound-3-262896.mp3mp3", block=False) 
+    playsound("sounds/benkirb-notification-sound-3-262896.mp3", block=False) 
+
+sound_win()
